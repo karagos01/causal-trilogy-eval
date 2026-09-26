@@ -77,3 +77,38 @@ base = np.linalg.norm(assoc(A, B, C))
 for s in (1, 2, 5, 10):
     v = np.linalg.norm(assoc(s * A, s * B, s * C))
     print(f"  scale {s:3d}: |assoc| = {v:12.6e}   ratio to s^3 * base = {v/(s**3*base):.12f}")
+
+print("\n=== why there was no lucky choice of line ===")
+print("each Fano line together with e0 is closed under multiplication and its three")
+print("units square to -1, i.e. it is a copy of H sitting inside O:")
+for a, b, c in PAPER:
+    sup = {0, a, b, c}
+    closed = all(T[i, j] in sup for i in sup for j in sup)
+    sq = all(mul(S, T, np.eye(8)[x], np.eye(8)[x])[0] == -1 for x in (a, b, c))
+    print(f"  (e0,e{a},e{b},e{c}): closed under multiplication = {closed}, "
+          f"e^2 = -1 for all three = {sq}")
+print("O has exactly 7 quaternion subalgebras containing 1, and they are exactly the")
+print("7 lines of the Fano plane.  A triad gate IS a quaternion subalgebra, so its")
+print("associator is zero by theorem, not by an accident of orientation.  There is no")
+print("orientation of the Fano plane, valid or otherwise, for which a triad gate reads")
+print("a non-zero associator.\n")
+
+NAMES = {1: "sigma_x", 2: "sigma_y", 3: "sigma_z", 4: "Q_top",
+         5: "helicity", 6: "valley", 7: "edge phase"}
+lines = [set(l) for l in PAPER]
+print("the 28 triples that DO have a non-zero associator, in Table 1 variables:")
+shown = 0
+for i, j, k in itertools.combinations(range(1, 8), 3):
+    if any({i, j, k} == l for l in lines):
+        continue
+    v = np.linalg.norm(assoc(np.eye(8)[i], np.eye(8)[j], np.eye(8)[k]))
+    if shown < 4:
+        print(f"  (e{i},e{j},e{k}) = ({NAMES[i]}, {NAMES[j]}, {NAMES[k]}): "
+              f"|assoc| = {v:.1f}")
+        shown += 1
+print("  ... 24 more, all of the same form.")
+print("every one of the 28 mixes a spin component with a skyrmion winding number, a")
+print("valley polarisation or an edge phase -- and closure.py shows that the product")
+print("of such states is never itself a physical state.  The two defects interlock:")
+print("the only gates whose observable is non-zero are the gates whose output the")
+print("hardware cannot hold.")

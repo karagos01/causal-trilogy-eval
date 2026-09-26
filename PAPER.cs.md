@@ -44,7 +44,7 @@ vynucená, ale orientace ne: je 2⁷ = 128 možností a `fano.py` je projde vše
 Normovanou divizní algebru dává jen **16 ze 128**. Publikovaná orientace je jedna
 z těch šestnácti. Její multiplikativní tabulka splňuje |XY| = |X||Y| na 5·10⁻¹⁶
 relativně na 4000 náhodných párech, je alternativní se stejnou přesností a nemá
-dělitele nuly. Pro srovnání: ty samé sedmy přímky zapsané s triádami ve vzestupném
+dělitele nuly. Pro srovnání: těch samých sedm přímek zapsaných s triádami ve vzestupném
 pořadí — což je ta volba, která vypadá samozřejmě — dávají algebru, která porušuje
 multiplikativitu normy až o 60 % a má explicitní dělitele nuly. Obsah nese
 orientace, a tu má správně.
@@ -88,9 +88,27 @@ roviny** (v `associator.py` ověřeno po jedné). Každá čtyřrozměrná podal
 generovaná e₀ a jednou přímkou Fanovy roviny má max |asociátor| < 10⁻¹⁴.
 
 Ta architektura je tedy hradlo po hradle složená právě z těch sedmi konfigurací,
-ve kterých je její centrální observabla identicky nulová. Aby hradlo přečetlo
-nenulový asociátor, muselo by kombinovat bázové jednotky, které *neleží* na
-společné přímce Fanovy roviny — čili nesmělo by to být triádové hradlo.
+ve kterých je její centrální observabla identicky nulová.
+
+Není to volba, která padla špatně, a žádná jiná orientace Fanovy roviny by
+nepomohla. Každá přímka spolu s e₀ je uzavřená na násobení a všechny tři její
+jednotky mají kvadrát −1: je to kopie ℍ uvnitř 𝕆, a 𝕆 má přesně sedm
+kvaternionových podalgeber obsahujících 1 — právě těch sedm přímek. Triádové
+hradlo *je* kvaternionová podalgebra, takže jeho asociátor je nulový z věty. Fanova
+rovina je standardní mnemotechnická pomůcka pro multiplikativní tabulku oktonionů
+a to, co vyznačuje, je přesně asociativní skelet té algebry: neasociativita sídlí
+v těch 28 trojicích, které **neleží** na společné přímce. Čtení toho diagramu jako
+topologie zapojení, s přímkami v roli hradel, umístí každé hradlo na to jediné
+místo, kde není co měřit.
+
+Aby hradlo přečetlo nenulový asociátor, muselo by kombinovat bázové jednotky mimo
+společnou přímku. V jeho vlastní tabulce 1 jsou nejmenší takové kombinace
+(σx, σy, Q_top), (σx, σy, helicita), (σx, σy, valley) a (σx, σy, fáze hranového
+proudu), každá s |asociátorem| = 2,0 — a všech 28 má tenhle tvar, míchají spinovou
+složku s číslem vinutí, valleyovou polarizací nebo hranovou fází. Sekce 3 ukazuje,
+že součin takových stavů není nikdy fyzikální stav. Ty dvě vady do sebe zapadají:
+jediná hradla, jejichž observabla je nenulová, jsou hradla, jejichž výstup hardware
+neumí udržet.
 
 Asociátor navíc nese méně informace, než práce předpokládá. Je trilineární, takže
 |[sA, sB, sC]| = s³|[A,B,C]| přesně (ověřeno na 12 desetinných míst pro

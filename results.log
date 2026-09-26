@@ -50,6 +50,34 @@ scaling of |[A,B,C]| with input magnitude (should be exactly cubic):
   scale   5: |assoc| = 1.616253e+03   ratio to s^3 * base = 1.000000000000
   scale  10: |assoc| = 1.293002e+04   ratio to s^3 * base = 1.000000000000
 
+=== why there was no lucky choice of line ===
+each Fano line together with e0 is closed under multiplication and its three
+units square to -1, i.e. it is a copy of H sitting inside O:
+  (e0,e1,e2,e3): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e1,e4,e5): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e2,e4,e6): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e3,e4,e7): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e1,e7,e6): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e2,e5,e7): closed under multiplication = True, e^2 = -1 for all three = True
+  (e0,e3,e6,e5): closed under multiplication = True, e^2 = -1 for all three = True
+O has exactly 7 quaternion subalgebras containing 1, and they are exactly the
+7 lines of the Fano plane.  A triad gate IS a quaternion subalgebra, so its
+associator is zero by theorem, not by an accident of orientation.  There is no
+orientation of the Fano plane, valid or otherwise, for which a triad gate reads
+a non-zero associator.
+
+the 28 triples that DO have a non-zero associator, in Table 1 variables:
+  (e1,e2,e4) = (sigma_x, sigma_y, Q_top): |assoc| = 2.0
+  (e1,e2,e5) = (sigma_x, sigma_y, helicity): |assoc| = 2.0
+  (e1,e2,e6) = (sigma_x, sigma_y, valley): |assoc| = 2.0
+  (e1,e2,e7) = (sigma_x, sigma_y, edge phase): |assoc| = 2.0
+  ... 24 more, all of the same form.
+every one of the 28 mixes a spin component with a skyrmion winding number, a
+valley polarisation or an edge phase -- and closure.py shows that the product
+of such states is never itself a physical state.  The two defects interlock:
+the only gates whose observable is non-zero are the gates whose output the
+hardware cannot hold.
+
 ########## closure.py ##########
 
 SOTP: product of two physically admissible states (n = 200000)

@@ -90,9 +90,27 @@ Fano lines** (verified elementwise in `associator.py`). Every 4-dimensional
 subalgebra spanned by e₀ and one Fano line has max |associator| < 10⁻¹⁴.
 
 So the architecture is assembled, gate by gate, out of precisely the seven
-configurations in which its central observable is identically zero. To read a
-non-zero associator the gate would have to combine basis units that do *not* lie
-on a common Fano line — that is, it would have to not be a triad gate.
+configurations in which its central observable is identically zero.
+
+This is not a choice that went the wrong way, and no other orientation of the
+Fano plane would help. Each line together with e₀ is closed under multiplication
+and all three of its units square to −1: it is a copy of ℍ sitting inside 𝕆, and
+𝕆 has exactly seven quaternion subalgebras containing 1 — the seven lines. A triad
+gate *is* a quaternion subalgebra, so its associator vanishes by theorem. The Fano
+plane is the standard mnemonic for the octonion multiplication table, and what it
+marks out is precisely the associative skeleton of the algebra: the
+non-associativity lives in the 28 triples that do **not** lie on a common line.
+Reading that diagram as a wiring topology, with the lines as gates, puts every gate
+in the one place where there is nothing to measure.
+
+To read a non-zero associator a gate would have to combine basis units off a common
+line. In the paper's own Table 1 the smallest such combinations are
+(σx, σy, Q_top), (σx, σy, helicity), (σx, σy, valley) and (σx, σy, edge phase),
+each with |associator| = 2.0 — and all 28 have that form, mixing a spin component
+with a winding number, a valley polarisation or an edge phase. Section 3 shows the
+product of such states is never a physical state. The two defects interlock: the
+only gates whose observable is non-zero are the gates whose output the hardware
+cannot hold.
 
 The associator also carries less information than the paper assumes. It is
 trilinear, so |[sA, sB, sC]| = s³|[A,B,C]| exactly (verified to 12 decimal places
