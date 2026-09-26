@@ -1,0 +1,233 @@
+
+########## fano.py ##########
+
+=== SOTP Eq. (3), as published ===
+  holes                        0
+  norm_violations              0
+  worst_norm_rel               5.153197850898287e-16
+  alternativity_violations     0
+  associator_vanished          0
+  n                            4000
+=== same 7 lines, every triad in ascending order ===
+  holes                        0
+  norm_violations              4000
+  worst_norm_rel               0.6038581684252095
+  alternativity_violations     4000
+  associator_vanished          0
+  n                            4000
+
+smallest |XY| over basis pairs, published table:   2.000e+00
+smallest |XY| over basis pairs, ascending order:   0.000e+00
+
+orientations of the 7 Fano lines giving a normed division algebra: 16 of 128
+published orientation is among them: True
+
+########## associator.py ##########
+
+associator magnitude by which basis directions the three inputs use
+support of the three inputs                     mean |[A,B,C]|  frac != 0
+full octonion (e0..e7)                            2.258633e+01     1.0000
+spin channels only (e0,e1,e2,e3)  <- Sec. 4.2     1.073679e-15     0.0000
+spin + skyrmion charge (e0..e4)                   6.364975e+00     1.0000
+any single Fano triad + e0, e.g. (e1,e2,e3)       1.068676e-15     0.0000
+e0,e1,e4,e5 (one spin axis + skyrmion pair)       1.075819e-15     0.0000
+
+every 4-dim subalgebra spanned by e0 + one Fano triad:
+  (e0,e1,e2,e3): max |associator| = 7.797e-15
+  (e0,e1,e4,e5): max |associator| = 8.748e-15
+  (e0,e2,e4,e6): max |associator| = 8.882e-15
+  (e0,e3,e4,e7): max |associator| = 6.739e-15
+  (e0,e1,e7,e6): max |associator| = 8.249e-15
+  (e0,e2,e5,e7): max |associator| = 9.069e-15
+  (e0,e3,e6,e5): max |associator| = 7.944e-15
+
+triples of distinct imaginary units with [ei,ej,ek] != 0: 28 of 35  (80.0 %)
+the 7 vanishing ones are exactly the 7 Fano lines: True
+
+scaling of |[A,B,C]| with input magnitude (should be exactly cubic):
+  scale   1: |assoc| = 1.293002e+01   ratio to s^3 * base = 1.000000000000
+  scale   2: |assoc| = 1.034402e+02   ratio to s^3 * base = 1.000000000000
+  scale   5: |assoc| = 1.616253e+03   ratio to s^3 * base = 1.000000000000
+  scale  10: |assoc| = 1.293002e+04   ratio to s^3 * base = 1.000000000000
+
+########## closure.py ##########
+
+SOTP: product of two physically admissible states (n = 200000)
+  |sigma| still 1 (e1,e2,e3):            0.0000 %
+  Q_top still +-1, i.e. an integer:      0.0000 %
+  valley polarisation still in [-1,1]:  17.5290 %
+  all three at once:                     0.0000 %
+  Q_top of the product: mean -0.0140, sd 4.4500, range [-16.614, +16.451]
+  fraction of products with |Q_top| > 1 (no such skyrmion exists): 82.50 %
+  fraction with 0.1 < |Q_top| < 0.9 (a fractional winding number): 14.01 %
+
+PCTP: product of two physically admissible optical states (n = 200000)
+  OAM charge l of the product still an integer:   0.0000 %
+  |(S2,S3)| of the product still <= 1:            8.8190 %
+  amplitude q_a of the product still in [0,1]:   10.8910 %
+  all three at once:                              0.0000 %
+
+PCTP Sec. 3, degree-of-freedom count for one wavepacket:
+  physical: amplitude E0 (1) + carrier phase phi0 (1) + Poincare sphere (2) + OAM charge l (1, discrete) = 4 continuous + 1 discrete
+  algebraic: q_a, q_i, q_j, q_k = 4 continuous reals
+  q_a is assigned BOTH amplitude and phase (Eq. 6), so the map is not
+  injective: 2 physical numbers collapse into 1 coordinate and cannot be
+  read back out.  S1 of the Stokes vector is dropped entirely.
+
+########## cqft.py ##########
+
+=== CQFT Sec. 2.1: the stated obstruction ===
+  j*i = -k  so (cA) (x) B with c=j, A=i, B=k gives -(k (x) k)
+  j*k = i  so A (x) (cB)                 gives  (i (x) i)
+  the paper's claim that bilinearity forces -(k(x)k) = i(x)i is ALGEBRAICALLY CORRECT.
+
+=== CQFT Eq. (2): is |x| a tensor product? ===
+  signature: H x H -> H, i.e. 4 + 4 real inputs -> 4 real outputs.
+  a tensor product of two 4-dim spaces has dimension 16 (over R, as a
+  bimodule over H it is still 4x4 = 16), so |x| cannot be one.
+  six different input pairs reproducing the same product P, max error 1.67e-16
+  the pre-image of any product is a 4-parameter family: 4 of the 8 input
+  numbers are destroyed by every |x|, the operation is not invertible.
+
+=== CQFT Eq. (4): the entangled state Psi_AB = (qA,t0) |x| (qB,t0) ===
+  (1) |x| (i)      -> [0. 1. 0. 0.]
+  (j) |x| (-k)     -> [ 0. -1.  0.  0.]
+  two different two-particle configurations give the identical state; the
+  formalism has no way to express correlation, hence none to express
+  entanglement, which Sec. 3.2 is about.
+
+=== CQFT Sec. 5: simulating the Causal Hysteresis Test ===
+  the two paths give different joint states: ||p1 - p2|| = 0.415034
+  photon A's reduced state differs:          ||rhoA1 - rhoA2|| = 0.000000
+  photon B's reduced state:                  ||rhoB1 - rhoB2|| = 6.831e-18   <-- exactly zero
+  worst ||rhoB1 - rhoB2|| over 20000 random non-commuting pairs: 4.605e-16
+  no local operation on A, in any order, changes anything measurable on B
+  alone.  A 'deterministic, measurable phase shift in Photon B' is a signal
+  and would be faster-than-light communication.
+
+  joint correlators E(a,b), which the paper says QM predicts to be equal:
+    b = [1, 0, 0]:  path1 -0.963558   path2 -0.736970   difference -0.226588
+    b = [0, 1, 0]:  path1 -0.172327   path2 -0.644218   difference +0.471890
+    b = [0, 0, 1]:  path1 +0.204594   path2 +0.204594   difference +0.000000
+  standard QM already predicts different correlations, so the experiment
+  does not separate the two theories anywhere: where it could show a
+  difference, QM predicts one too; where QM predicts none, CQFT's
+  signature is forbidden by no-signalling.
+
+=== does the causal index tau enter any computed quantity? ===
+  distinct value components over 4 different (t1,t2) assignments: 1
+  tau is not an argument of the value component.  Every prediction the
+  three papers derive from |x| is a prediction of ordinary quaternion or
+  octonion multiplication - Hamilton 1843, Graves 1843, Cayley 1845.
+  What is added is a label on the operand order, which was already there.
+
+########## hardware.py ##########
+
+
+========================================================================
+PCTP: 'near-zero thermodynamic entropy generation' (abstract, Table 1)
+========================================================================
+  Landauer bound at 300 K            : 2.871e-21 J  = 0.0179 eV/bit
+  one photon at 1550 nm                : 1.282e-19 J  = 0.7999 eV
+  -> a single photon already costs      : 44.6 x the Landauer bound
+  photons needed per bit at BER 1e-9   : 20.7 (shot-noise limit)
+  -> energy per detected bit            : 2.656e-18 J = 925 x Landauer
+  -> including the source, 1550 nm DFB laser, 20 % wall-plug : 4.625e+03 x Landauer
+  -> including the source, at 5 %                            : 1.850e+04 x Landauer
+  Si3N4 at 0.1 dB/cm over  1 cm of mesh: 97.7 % of the light survives
+  Si3N4 at 0.1 dB/cm over 10 cm of mesh: 79.4 % of the light survives
+  Si3N4 at 0.1 dB/cm over 30 cm of mesh: 50.1 % of the light survives
+  the paper also specifies electro-optic LiNbO3 phase shifters (Sec. 3),
+  which dissipate, while Table 1 lists the loss as 'near-zero (geometric
+  phase)'.  Geometric phase and an electro-optic modulator are not the
+  same component.
+
+========================================================================
+PCTP: the isolator
+========================================================================
+  claimed in Sec. 4.2      : > 35 dB isolation, Ce:YIG / BIG on Si3N4, B0 = 0.1 T
+  measured in its own ref. : 19.5 dB (Bi et al., Nat. Photonics 5, 758 (2011),
+                             Ce:YIG bonded to a Si ring, 1550 nm)
+  -> 15.5 dB beyond the cited demonstration, i.e. 35x more
+     rejection, on a different waveguide platform (Si3N4 has a lower index
+     contrast with the garnet than Si, which reduces the Faraday overlap)
+
+========================================================================
+PCTP: the NV-centre 'causal memory latch' (Sec. 4.3)
+========================================================================
+  waveguide photon, 1550 nm            : 0.800 eV
+  NV- zero-phonon line, 637 nm         : 1.946 eV
+  NV- standard optical pumping, 532 nm : 2.331 eV
+  -> the guided photon is short of the ZPL by a factor 2.43;
+     diamond is transparent at 1550 nm, so the evanescent field of the
+     Si3N4 waveguide cannot drive the 3A2 -> 3E transition at all.
+  NV- ground-state splitting (2.87 GHz): 11.87 ueV -> addressed with
+     microwaves, 67392x below the optical photon the paper uses.
+
+========================================================================
+SOTP: Eq. (7) versus the sentence above it
+========================================================================
+  text  : 'propagation mediated exclusively by pure spin currents (Js)
+           without net charge displacement (Jc = 0)'
+  Eq.(7): Js = (hbar / 2e) * theta_SH * (Jc x sigma)
+  -> setting Jc = 0 in the paper's own equation gives Js = 0.  The spin Hall
+     effect converts a charge current into a spin current; it does not
+     produce one from nothing, and the I^2 R loss is in the Pt/W layer that
+     carries Jc.  'True Zero' dissipation (Table 2) is the claim that the
+     drive current is free.
+
+  one SOT switching event, Pt 5 nm, 100x100 nm, J = 5e+11 A/m^2, 1 ns:
+    dissipated energy                  : 3.750e-15 J = 3.75 fJ
+    -> 1.306e+06 x the Landauer bound, against 'True Zero'
+
+========================================================================
+SOTP: how far a pure spin current actually travels
+========================================================================
+  spin diffusion length, Pt (300 K)      :     3.0 nm
+  spin diffusion length, W (300 K)       :     2.0 nm
+  spin diffusion length, CoFeB           :     2.0 nm
+  spin diffusion length, Bi2Se3 surface  :    20.0 nm
+  spin diffusion length, Cu (300 K)      :   350.0 nm
+  a chip-scale Fano mesh                    :     1.0 mm = 1000000 nm
+  -> the routing distance exceeds the spin diffusion length by ~3e+05,
+     i.e. attenuation exp(-L/lambda) = exp(-3e+05). Nothing arrives.
+
+========================================================================
+SOTP: 'immunity to parasitic magnetic fields up to 10 T' (Sec. 4.3)
+========================================================================
+  Ru RKKY coupling  0.5 mJ/m^2, Co 0.8 nm: spin-flop field   0.89 T
+  Ru RKKY coupling  1.0 mJ/m^2, Co 0.8 nm: spin-flop field   1.79 T
+  Ru RKKY coupling  2.0 mJ/m^2, Co 0.8 nm: spin-flop field   3.57 T
+  Ru RKKY coupling  6.0 mJ/m^2, Co 0.8 nm: spin-flop field  10.71 T
+  -> 10 T needs J_ex = 5.6 mJ/m^2, at the very top of the
+     strongest Co/Ru coupling ever reported.  More to the point:
+  stray fields inside a packaged chip are of order uT to mT, so a 10 T
+  immunity figure is 4-7 orders above anything the device would meet.
+  It is not a specification, it is decoration.
+
+========================================================================
+SOTP Sec. 6.1: octonions, SU(3) and the chiral condensate
+========================================================================
+  dim O = 8, of which 7 imaginary units; dim su(3) = 8 generators.
+  these are different objects: Aut(O) = G2 (dim 14), and SU(3) appears as
+  the subgroup of G2 fixing one imaginary unit.  The 8 coordinates of an
+  octonion do not 'project onto the Gell-Mann matrices'; the matching
+  count of 8 is a coincidence between an algebra dimension and a Lie
+  algebra dimension.  Furey (ref. [3]) works with the left-adjoint action
+  of the complexified octonions, not with the 8 coordinates.
+
+  QCD scale Lambda_QCD                 : 2.000e+08 eV
+  one 10 GHz spin-wave quantum         : 4.136e-05 eV = 41.36 ueV
+  -> the excitation the SOTP can create is 4.84e+12 x too small to
+     touch the chiral condensate or nucleon deconfinement.
+
+========================================================================
+SOTP Sec. 6.2: '3D flywheel gravitational deformers'
+========================================================================
+  flywheel: 1 kg, r = 10 cm, 100000 rpm -> J = 52.4 kg m^2/s
+  (rim speed 1047 m/s, already above the strength limit of any alloy)
+  Lense-Thirring rate at the rim       : 7.777e-23 rad/s
+  frame dragging measured by Gravity Probe B: 5.715e-15 rad/s (19 % error)
+  -> the flywheel is 7.35e+07 x below the smallest frame-dragging
+     effect ever measured, and that one needed a satellite and 4 SQUID
+     gyroscopes at 1.8 K.
