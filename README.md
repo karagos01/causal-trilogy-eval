@@ -64,6 +64,7 @@ Full output of one run: [`results.log`](results.log).
 
 - [`octonion-mppt-eval`](https://github.com/karagos01/octonion-mppt-eval) — the octonion two-layer/associator template and the magnon claims
 - [`xternary-eval`](https://github.com/karagos01/xternary-eval) — the 2-bit LLM inference engine
+- [`openql-eval`](https://github.com/karagos01/openql-eval) — the openQL / openOL tensor matrix architecture of October 2026
 
 ## Licence
 
